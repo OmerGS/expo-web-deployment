@@ -60,6 +60,6 @@ If you try to use a URL with an integrated port, such as `https://example.com:87
 
 ## 🧑‍💻 Author
 Hey, I’m OmerGS, a dev from France 🇫🇷. 
-Not much to say, but feel free to check out my other projects on [GitHub]([url](https://github.com/OmerGS?tab=repositories)) and visit [my website](https://omergs.com) for more.
+Not much to say, but feel free to check out my other projects on ([GitHub](https://github.com/OmerGS?tab=repositories)) and visit [my website](https://omergs.com) for more.
 
    
