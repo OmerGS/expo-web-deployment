@@ -1,0 +1,34 @@
+stages:
+  - check
+  - notify
+
+# Job to check Expo configuration
+check_expo:
+  stage: check
+  image: node:18
+  before_script:
+    - apt-get update && apt-get install -y rsync  
+  script:
+    # Installing dependencies
+    - npm install 
+    - npm install -g expo
+    - if ! npm list expo; then echo "Le module expo n'est pas installé, installation de expo"; npm install expo; fi
+
+    # Running Expo Doctor (to check the configuration)
+    - npx expo-doctor
+    - if [ $? -ne 0 ]; then echo "Expo Doctor a échoué, arrêt du pipeline"; exit 1; fi
+
+  only:
+    - dev  # Run only if 'dev' branch is edited
+
+# Job to call API to notify the server
+notify_server:
+  stage: notify
+  image: curlimages/curl 
+  script:
+    - curl -X POST https://api.example.com/notify 
+
+  only:
+    - dev   # Run only if 'dev' branch is edited
+  needs:
+    - job: check_expo  # Job notify_server depends on check_expo
